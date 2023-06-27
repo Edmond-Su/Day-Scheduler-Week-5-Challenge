@@ -3,28 +3,25 @@
 // in the html.
 $(function () {
 
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
   var dayListEl = $('#dayListContainer');
-
+  //Function that saves text entered by user to local storage when user clicks on save button.
   function handleSaveAppointment(event) {
-    console.log("CLICK")
+    //Getting event target
     var btnClicked = $(event.target)
-    // console.log(btnClicked)
-    var btnParentEl = btnClicked.closest('div')
+    //Getting the closest parent of event target that has a class of time-block.
+    //Closest is used to allow the rest of the code to work properly if the user clicks on the image inside the button.
+    var btnParentEl = btnClicked.closest('.time-block')
+    //Getting the ID of the time-block element
     var btnParentId = btnParentEl.attr('id')
-    // console.log(btnParentEl)
-    // // console.log(btnParentId)
+    // Getting the child element of the time-block element that has a class of description
     var eventTextEl = btnParentEl.children('.description')
-    // console.log(eventTextEl)
+    // Saving the value of the description element
     var textToSave = eventTextEl.val()
-    // console.log(textToSave)
+    //Making sure the value isnt empty because it has a default value of " "
     if (textToSave != " ") {
+      //Saving the ID as the key and text value as the value
       localStorage.setItem(btnParentId, textToSave)
+      // Creating a text element that will pop up for 3 seconds upon saving to alert user that the appointment has been saved
       var savedEl = $('<p>')
       savedEl.text('Appointment saved to local storage')
       savedEl.css('text-align', 'center')
@@ -35,7 +32,7 @@ $(function () {
     }
 
   }
-
+  //Event listener that is looking for clicks on the dayListEl element and its child elements that have the class saveBtn and runs the handleSaveAppointment function
   dayListEl.on('click', '.saveBtn', handleSaveAppointment)
 
   // Getting current hour and saving it to a variable.
@@ -56,12 +53,17 @@ $(function () {
 
   //Function that checks local storage for saved appointments
   function readSavedAppoinments() {
+    //Looping through all the hourly time blocks and checking if there is any locally saved appointments for them.
     for (var i = 9; i < 18; i++) {
+      //assigning a variable to the time block element with the class hour-'i' 
       var hourEl = $('#hour-' + i);
+      // assigning a variable to the child element with the class description
       var textAreaEl = hourEl.children('.description')
+      // getting the locally saved value of the item that has a key of hour-'i'
       var savedEvent = localStorage.getItem('hour-' + i)
+      // Checking if there was anything saved
       if (savedEvent) {
-        console.log(savedEvent)
+        // Applying the locally saved value to the current hour block text area
         textAreaEl.text(savedEvent)
       }
 
