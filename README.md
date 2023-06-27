@@ -16,7 +16,7 @@ N/A
 
 ![Workday Scheduler Webpage Screenshot](./Assets/images/Webpage_Screenshot.PNG)
 
-To add and save an appointment, click on the central text area for the time block that the appointment is at. Enter the details of the appointment and then click on the blue save button on the right of the time block you added the appointment to. Refresh the page to allow the page to update the background colors of the timeblocks.
+To add and save an appointment, click on the central text area for the time block that the appointment is at. Enter the details of the appointment and then click on the blue save button on the right of the time block you added the appointment to. Some text will appear below the header to norify the user that the appointment has been saved. Refresh the page to allow the page to update the background colors of the timeblocks.
 
 ## Credits
 
